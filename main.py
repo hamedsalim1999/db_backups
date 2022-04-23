@@ -43,22 +43,20 @@ def mysql_backup(database_name,password=db_password,host=db_host,prot=db_host_po
     return f"{database_name} is Done"
 
 
-# try:
-#     databases = get_mysql_database_list(db_password)
-# except:
-#     print("ERROR")
-
-databases = get_mysql_database_list(db_password)
-
-if "[Warning]" in databases[0]:
-    databases.pop(0)
-    try:
-        databases = list(filter(None, databases))
-    except:
-        pass
-
-
-logging.info(list(map(mysql_backup,databases)))
+try:
+    databases = get_mysql_database_list(db_password)
+except:
+    logging.error("Can't find databases list ")
 
 
 
+
+def main():
+    logging.info(list(map(mysql_backup,databases)))
+
+
+
+if __name__ == "__main__":
+    main()
+else:
+   print("File one executed when imported")
