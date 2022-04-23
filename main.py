@@ -5,7 +5,6 @@ from os import getenv
 from datetime import datetime
 from dotenv import load_dotenv
 import subprocess
-import mysql.connector as m
 from sqlalchemy import create_engine 
 
 
@@ -21,9 +20,6 @@ db_type= getenv('db_type')
 
 
 engine = create_engine(f"{db_type}://{db_user}:{db_password}@{db_host}:{db_host_port}")
-
-connection = m.connect(host=db_host, user='root',password=db_password)
-cursor = connection.cursor()
 
 logging.basicConfig(level=logging.INFO)
 client = docker.from_env()
