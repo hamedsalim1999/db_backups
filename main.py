@@ -43,17 +43,19 @@ def mysql_backup(database_name,password=db_password,host=db_host,prot=db_host_po
     return f"{database_name} is Done"
 
 
-try:
-    databases = get_mysql_database_list(db_password)
-except:
-    logging.error("Can't find databases list ")
+
 
 
 
 
 def main():
+    try:
+        databases = get_mysql_database_list(db_password)
+    except:
+        logging.error("Can't find databases list ")
+        
+    
     logging.info(list(map(mysql_backup,databases)))
-
 
 
 if __name__ == "__main__":
