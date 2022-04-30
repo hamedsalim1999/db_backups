@@ -2,3 +2,5 @@ venv
 .env
 */__pycache__/
 __pycache__/test_backups.cpython-310-pytest-7.1.2.pyc
+__pycache__/test_mongo.cpython-310-pytest-7.1.2.pyc
+__pycache__/test_mysql.cpython-310-pytest-7.1.2.pyc
