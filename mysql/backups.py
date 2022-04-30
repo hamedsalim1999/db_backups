@@ -5,18 +5,19 @@ from os import getenv
 from datetime import datetime
 from dotenv import load_dotenv
 from sqlalchemy import create_engine 
-
+import re
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
 class MySql:
-    def __init__(self,db_password:str, db_host:str, db_host_port:str, db_user:str, db_type:str,continer:bool=False,container_name:str=None) -> None:
+    def __init__(self,db_password:str, db_host:str, db_host_port:str, db_user:str, db_type:str,address:str,continer:bool=False,container_name:str=None) -> None:
         self.now = datetime.now().strftime("%m-%d-%Y") 
         self.db_password = db_password
         self.db_host = db_host
         self.db_host_port = db_host_port
         self.db_user = db_user
         self.db_type= db_type      
+        self.address=re.sub(r"\/$","",address)
         self.continer = continer
         if self.continer :
             self.container_name = container_name  
@@ -43,9 +44,9 @@ class MySql:
     def mysql_backup_command(self,database_name:str):
         if self.continer :
             container = self.config_continer()
-            logging.info(container.exec_run(f"bash -c 'mysqldump -h {self.db_host} --port={self.db_host_prot} -p{self.db_password} {database_name}> /tmp/{self.now}-{database_name}.sql'"))
+            logging.info(container.exec_run(f"bash -c 'mysqldump -h {self.db_host} --port={self.db_host_prot} -p{self.db_password} {database_name}> {self.address}/{self.now}-{database_name}.sql'"))
         else:
-            subprocess.Popen(f"mysqldump -p{self.db_password} -u root  -h {self.db_host} {database_name}> /tmp/db/{self.now}-{database_name}.sql", shell=True)
+            subprocess.Popen(f"mysqldump -p{self.db_password} -u root  -h {self.db_host} {database_name}> {self.address}/{self.now}-{database_name}.sql", shell=True)
     
     def back_up(self):
         try:
