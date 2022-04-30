@@ -16,7 +16,7 @@ try:
 except:
     raise("you use none contiber database")
 
-db = MySql(db_password, db_host, db_host_port, db_user, db_type)
+db = MySql(db_password, db_host, db_host_port, db_user, db_type,"/tmp/")
 
 def db_connect():
     
