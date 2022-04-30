@@ -12,12 +12,12 @@ db_host= getenv('db_host')
 db_host_port = getenv('db_host_port')
 db_user = getenv('db_user')
 db_type= getenv('db_type')
-
+addres="/home/hamed/Desktop/testdb/"
 
 
 
 def main():
-    db_connect = MySql(db_password, db_host, db_host_port, db_user, db_type)
+    db_connect = MySql(db_password, db_host, db_host_port, db_user, db_type,addres)
     logging.info(db_connect.back_up())
 
 
