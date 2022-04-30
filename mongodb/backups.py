@@ -34,5 +34,5 @@ class MongoDB:
             container = self.config_continer()
             logging.info(container.exec_run(f"bash -c 'mongodump --host={self.db_host} --port={self.db_host_port} --username {self.db_user} --password {self.db_password} --out={self.address}/{self.now}'"))
         else:
-            subprocess.Popen(f"mongodump --host={self.db_host} --port={self.db_host_port} --username {self.db_user} --password {self.db_password} --out={self.address}/{self.now} --quiet", shell=True)
+            logging.info(subprocess.Popen(f"mongodump --host={self.db_host} --port={self.db_host_port} --username {self.db_user} --password {self.db_password} --out={self.address}/{self.now} --quiet", shell=True))
 
