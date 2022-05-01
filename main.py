@@ -12,15 +12,16 @@ db_host= getenv('db_host')
 db_host_port = getenv('db_host_port')
 db_user = getenv('db_user')
 db_type= getenv('db_type')
-addres="/home/hamed/Desktop/testdb/"
+addres=""
 
 
 
 def main():
     db_connect = MySql(db_password, db_host, db_host_port, db_user, db_type,addres)
     logging.info(db_connect.back_up())
+    logging.info(db_connect.scp_transfer_directory("","root","",db_connect.address,"/root/back/"))
 
-
+    
 if __name__ == "__main__":
     main()
 else:
