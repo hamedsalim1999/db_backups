@@ -6,10 +6,11 @@ from datetime import datetime
 from dotenv import load_dotenv
 from sqlalchemy import create_engine 
 import re
+from base.base import Main
 load_dotenv()
 logging.basicConfig(level=logging.INFO)
 
-class MySql:
+class MySql(Main):
     def __init__(self,db_password:str, db_host:str, db_host_port:str, db_user:str, db_type:str,address:str,continer:bool=False,container_name:str=None) -> None:
         self.now = datetime.now().strftime("%m-%d-%Y") 
         self.db_password = db_password
